@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+//test 
 void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
@@ -18,7 +18,6 @@ void insertionSort(int array[], int n) {
         array[j+1] = curr;
     }
 }
-////////////////////////////////////////
 
 int main() {
     int test[] = {3,4,6,77,2,5,3,1};
