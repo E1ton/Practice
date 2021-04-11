@@ -1,12 +1,12 @@
 #include <iostream>
 using namespace std;
-//test 
+
 void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;    
 }
-
+//if n not provided we can use 'sizeof(array)/sizeof(array[0])' to calculate size
 void insertionSort(int array[], int n) {
     for(int i=0; i<n; i++) {
         int j = i - 1;
@@ -19,9 +19,22 @@ void insertionSort(int array[], int n) {
     }
 }
 
+void bubbleSort(int array[], int n) {
+    bool sorted = true;
+    do {
+        sorted = true;
+        for(int i=0; i<n-1; i++) {
+            if(array[i] > array[i+1]) {
+                swap(&array[i], &array[i+1]);
+                sorted = false;
+            }
+        }
+    } while(sorted == false);
+}
+
 int main() {
     int test[] = {3,4,6,77,2,5,3,1};
-    insertionSort(test, 8);
+    bubbleSort(test, 8);
     for(int i=0; i<8; i++) {
         cout << test[i] << ' ';
     }
