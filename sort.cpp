@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 void swap(int *a, int *b) {
@@ -54,9 +55,35 @@ void shellSort(int array[], int n) {
     }
 }
 
+void QuickSort(int array[], int left, int right) {
+    if(left < right) {
+        int pivot = array[right];
+        int pi = left;
+        for(int i = left; i<right; i++) {
+            if(array[i] <= pivot) {
+                swap(&array[i], &array[pi++]);
+            }
+        }
+        swap(&array[pi], &array[right]);
+        QuickSort(array, left, pi-1);
+        QuickSort(array, pi+1, right);
+    }
+}
+
+void HeapSort(int array[],int n) {
+    priority_queue<int, vector<int>, greater<int>> pq;
+    for(int i=0; i<n; i++) {
+        pq.push(array[i]);
+    }
+    for(int i=0; i<n; i++) {
+        array[i] = pq.top();
+        pq.pop();
+    }
+}
+
 int main() {
     int test[] = {3,4,6,77,2,5,3,1};
-    shellSort(test, 8);
+    HeapSort(test,8);
     for(int i=0; i<8; i++) {
         cout << test[i] << ' ';
     }
