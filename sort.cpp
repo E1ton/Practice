@@ -81,9 +81,40 @@ void HeapSort(int array[],int n) {
     }
 }
 
+void merge(int array[], int left, int right, int mid) {
+    int a1l = mid - left + 1;
+    int a2l = right - mid;
+    int a1[a1l], a2[a2l];
+    for(int i=0; i<a1l; i++) {
+        a1[i] = array[left+i];
+    }
+    for(int i=0; i<a2l; i++) {
+        a2[i] = array[mid + i + 1];
+    }
+    int i=0,j=0,k=left;
+    while(i<a1l && j<a2l) {
+        a1[i] <= a2[j] ? array[k++] = a1[i++] : array[k++] = a2[j++];
+    }
+    while(i<a1l) {
+        array[k++] = a1[i++];
+    }
+    while(j<a2l) {
+        array[k++] = a2[j++];
+    }
+}
+
+void MergeSort(int array[], int left, int right) {
+    if(left < right) {
+        int mid = (right + left) >> 1;
+        MergeSort(array, left, mid);
+        MergeSort(array, mid+1, right);
+        merge(array, left, right, mid);
+    }
+}
+
 int main() {
     int test[] = {3,4,6,77,2,5,3,1};
-    HeapSort(test,8);
+    MergeSort(test,0,7);
     for(int i=0; i<8; i++) {
         cout << test[i] << ' ';
     }
