@@ -2,6 +2,28 @@
 #include <queue>
 using namespace std;
 
+void heapify(int arr[], int n, int i)
+{
+    int root = i;
+    int l = 2 * i + 1;
+    int r = 2 * i + 2;
+    if (l < n && arr[l] > arr[root])
+        root = l;
+    if (r < n && arr[r] > arr[root])
+        root = r;
+    if (root != i) {
+        swap(arr[i], arr[root]);
+        heapify(arr, n, root);
+    }
+}
+  
+void buildHeap(int arr[], int n){
+    int startIdx = (n / 2) - 1;
+    for (int i = startIdx; i >= 0; i--) {
+        heapify(arr, n, i);
+    }
+}
+
 void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
@@ -119,3 +141,63 @@ int main() {
         cout << test[i] << ' ';
     }
 }
+
+/*
+vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> v;
+        if(root == nullptr) return v;
+        stack<TreeNode *> s;
+        while(true) {
+            if(root != nullptr) {
+                s.push(root);
+                root = root->left;
+            }else{
+                if(s.empty()) break;
+                root = s.top();
+                v.push_back(root->val);
+                s.pop();
+                root = root->right;
+            }
+        }
+        return v;
+    }
+
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> v;
+        if(root == nullptr) return v;
+        stack<TreeNode *> s;
+        s.push(root);
+        TreeNode * node;
+        while(!s.empty()) {
+            v.push_back(s.top()->val);
+            node = s.top();
+            s.pop();
+            if(node->right) s.push(node->right);
+            if(node->left) s.push(node->left);
+        }
+        return v;
+    }
+
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> v;
+        if(root == nullptr) return v;
+        stack<TreeNode*> s1;
+        stack<TreeNode*> s2;
+        s1.push(root);
+        TreeNode * node;
+        while(!s1.empty()) {
+            node = s1.top();
+            s1.pop();
+            s2.push(node);
+            if(node->left) s1.push(node->left);
+            if(node->right) s1.push(node->right);
+        }
+        while(!s2.empty()) {
+            node = s2.top();
+            s2.pop();
+            v.push_back(node->val);
+        }
+        return v;
+    }   
+    */
+   
